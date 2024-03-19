@@ -10,7 +10,11 @@ export default () => {
     mount(ref.current, {
       onNavigate: ({ pathname: nextPathName }) => {
         console.log(nextPathName);
-        history.push(nextPathName);
+
+        const { pathname } = history.location; // Avoid infinite loop
+        if (pathname !== nextPathName) {  // Avoid infinite loop
+          history.push(nextPathName);
+        }
       },
     });
   });
