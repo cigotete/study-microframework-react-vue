@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createMemoryHistory,createBrowserHistory } from 'history';
+import { createMemoryHistory, createBrowserHistory } from 'history';
 import App from './App';
 
 // Mount function to start up the app
@@ -12,16 +12,15 @@ const mount = (el, { onNavigate, defaultHistory }) => {
   }
 
   ReactDOM.render(<App history={history} />, el);
-  
-  return {
-    onParentNavigate({ pathname: nextPathName }) {
-      console.log(location);
 
-      const { pathname } = history.location; // Avoid infinite loop
-      if (pathname !== nextPathName) {  // Avoid infinite loop
-        history.push(nextPathName);
+  return {
+    onParentNavigate({ pathname: nextPathname }) {
+      const { pathname } = history.location;
+
+      if (pathname !== nextPathname) {
+        history.push(nextPathname);
       }
-    }
+    },
   };
 };
 
