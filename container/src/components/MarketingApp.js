@@ -4,16 +4,15 @@ import { useHistory } from 'react-router-dom';
 
 export default () => {
   const ref = useRef(null);
-  const history = useHistory(); // copy browser history
+  const history = useHistory();
 
   useEffect(() => {
     const { onParentNavigate } = mount(ref.current, {
-      onNavigate: ({ pathname: nextPathName }) => {
-        console.log(nextPathName);
+      onNavigate: ({ pathname: nextPathname }) => {
+        const { pathname } = history.location;
 
-        const { pathname } = history.location; // Avoid infinite loop
-        if (pathname !== nextPathName) {  // Avoid infinite loop
-          history.push(nextPathName);
+        if (pathname !== nextPathname) {
+          history.push(nextPathname);
         }
       },
     });
